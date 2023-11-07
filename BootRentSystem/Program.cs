@@ -1,6 +1,9 @@
 
 using BootRentSystem.Context;
 using BootRentSystem.Context.Identity;
+using BootRentSystem.Context.Rent;
+using BootRentSystem.Identity;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace BootRentSystem
@@ -21,6 +24,20 @@ namespace BootRentSystem
             builder.Services.AddDbContext<AppIdentityDbContext>(options =>
             options.UseSqlServer(builder.Configuration.GetConnectionString("IdentityConnection")));
 
+            builder.Services.AddDbContext<RentContext>(options =>
+            options.UseSqlServer(builder.Configuration.GetConnectionString("RentConnection")));
+
+            /*    builder.Services.AddIdentityCore<AppIdentityDbContext>(options =>   //NotUnderstood
+                    {
+
+                    })
+                   .AddEntityFrameworkStores<AppIdentityDbContext>()
+                   .AddSignInManager<SignInManager<AppUser>>();*/
+
+            builder.Services.AddIdentity<AppUser, IdentityRole>()
+                .AddEntityFrameworkStores<AppIdentityDbContext>()
+                .AddDefaultTokenProviders();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -32,6 +49,8 @@ namespace BootRentSystem
 
             app.UseHttpsRedirection();
 
+
+            app.UseAuthentication();
             app.UseAuthorization();
 
 

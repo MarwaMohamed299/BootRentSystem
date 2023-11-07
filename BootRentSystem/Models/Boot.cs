@@ -3,9 +3,9 @@
     public class Boot
     {
 
-        public int BoatId { get; set; }
+        public Guid BootId { get; set; }
 
-        public string BoatName { get; set; } = string.Empty;
+        public string BootName { get; set; } = string.Empty;
 
         public string Manufacturer { get; set; } = string.Empty;
 
@@ -15,6 +15,10 @@
         public bool IsAvailable { get; set; }
 
         public DateTime CreatedAt { get; set; }
+
+        //NavProp
+
+        public ICollection<Reservation> Reservations = new HashSet<Reservation>();
 
     }
 }
