@@ -9,10 +9,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace BootRentSystem.Migrations.Rent
+namespace BootRent.DAL.Migrations.Rent
 {
     [DbContext(typeof(RentContext))]
-    [Migration("20231108085900_InitialRent")]
+    [Migration("20231108220602_InitialRent")]
     partial class InitialRent
     {
         /// <inheritdoc />
@@ -25,7 +25,7 @@ namespace BootRentSystem.Migrations.Rent
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("BootRentSystem.Models.Boot", b =>
+            modelBuilder.Entity("BootRent.DAL.Data.Models.Boot", b =>
                 {
                     b.Property<Guid>("BootId")
                         .ValueGeneratedOnAdd()
@@ -53,7 +53,7 @@ namespace BootRentSystem.Migrations.Rent
                     b.ToTable("Boots");
                 });
 
-            modelBuilder.Entity("BootRentSystem.Models.Reservation", b =>
+            modelBuilder.Entity("BootRent.DAL.Data.Models.Reservation", b =>
                 {
                     b.Property<Guid>("ReservationId")
                         .ValueGeneratedOnAdd()
@@ -75,9 +75,9 @@ namespace BootRentSystem.Migrations.Rent
                     b.ToTable("Reservations");
                 });
 
-            modelBuilder.Entity("BootRentSystem.Models.Reservation", b =>
+            modelBuilder.Entity("BootRent.DAL.Data.Models.Reservation", b =>
                 {
-                    b.HasOne("BootRentSystem.Models.Boot", "Boot")
+                    b.HasOne("BootRent.DAL.Data.Models.Boot", "Boot")
                         .WithMany("Reservations")
                         .HasForeignKey("BootId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -86,7 +86,7 @@ namespace BootRentSystem.Migrations.Rent
                     b.Navigation("Boot");
                 });
 
-            modelBuilder.Entity("BootRentSystem.Models.Boot", b =>
+            modelBuilder.Entity("BootRent.DAL.Data.Models.Boot", b =>
                 {
                     b.Navigation("Reservations");
                 });

@@ -38,11 +38,12 @@ namespace BootRentSystem.Controllers.AppUsers
 
                 Address = new Address
                 {
-                    FirstName = registerDto.FName,
-                    LastName = registerDto.LName,
+                    FirstName = registerDto.FirstName,
+                    LastName = registerDto.LastName,
                     City = registerDto.City,
                     Street = registerDto.Street,
                     State = registerDto.State,
+                    E_mail = registerDto.Email
                 }
 
             };
@@ -52,8 +53,7 @@ namespace BootRentSystem.Controllers.AppUsers
             {
                 foreach (var error in RegisterResult.Errors)
                 {
-                    // Log or debug the error messages
-                    Console.WriteLine($"Error: {error.Description}");
+                    return BadRequest(RegisterResult.Errors);
                 }
 
                 return BadRequest("Registration Failed");
@@ -70,7 +70,7 @@ namespace BootRentSystem.Controllers.AppUsers
                     new Claim (ClaimTypes.Role ,newAppUser.UserType.ToString())
                 };
                 await _userManager.AddClaimsAsync(newAppUser, userClaims);
-                return null;
+                return Ok();
             }
 
 
@@ -80,7 +80,7 @@ namespace BootRentSystem.Controllers.AppUsers
         [Route("login")]
         public async Task<ActionResult<LogInResultDto>> LogIn(LogInDto credentials)
         {
-            var appUser = await _userManager.FindByNameAsync(credentials.DisplayName);
+            var appUser = await _userManager.FindByEmailAsync(credentials.E_Mail);
             if (appUser == null)
             {
                 return BadRequest("User Not Found");
@@ -124,7 +124,7 @@ namespace BootRentSystem.Controllers.AppUsers
                 Message = "LogIn Success"
             };
 
-            
+
         }
     }
 }

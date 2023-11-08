@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace BootRentSystem.Migrations.Rent
+namespace BootRent.DAL.Migrations.Rent
 {
     /// <inheritdoc />
     public partial class InitialRent : Migration
