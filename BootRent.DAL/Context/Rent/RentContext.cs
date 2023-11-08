@@ -1,10 +1,8 @@
-﻿using BootRentSystem.Identity;
-using BootRentSystem.Models;
+﻿using BootRent.DAL.Data.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Identity.Client;
-using static System.Reflection.Metadata.BlobBuilder;
 
-namespace BootRentSystem.Context.Rent
+
+namespace BootRent.DAL.Context.Rent
 {
     public class RentContext : DbContext
     {
@@ -12,9 +10,9 @@ namespace BootRentSystem.Context.Rent
         public DbSet<Reservation> Reservations => Set<Reservation>();
 
         public RentContext( DbContextOptions<RentContext> options) :base (options)
-
         {
         }
+        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -30,8 +28,7 @@ namespace BootRentSystem.Context.Rent
             modelBuilder.Entity<Reservation>().HasOne(b => b.Boot).WithMany(r => r.Reservations).
                 HasForeignKey(b => b.BootId).OnDelete(DeleteBehavior.NoAction);
 
-            modelBuilder.Entity<Boot>().HasData(Boots);
-            modelBuilder.Entity<Reservation>().HasData(Reservations);
+           
         }
     
 

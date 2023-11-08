@@ -1,4 +1,4 @@
-﻿namespace BootRentSystem.Models
+﻿namespace BootRent.DAL.Data.Models
 {
     public class Reservation
     {
@@ -7,7 +7,7 @@
         public DateTime CheckOutDate { get; set; }
 
         //NavProp
-         public Guid BootId { get; set; } 
+        public Guid BootId { get; set; }
         public Boot? Boot { get; set; }
     }
 }

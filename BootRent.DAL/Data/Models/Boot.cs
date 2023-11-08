@@ -1,4 +1,4 @@
-﻿namespace BootRentSystem.Models
+﻿namespace BootRent.DAL.Data.Models
 {
     public class Boot
     {
@@ -11,7 +11,7 @@
 
         public int ProductionYear { get; set; }
 
-      
+
         public bool IsAvailable { get; set; }
 
         public DateTime CreatedAt { get; set; }

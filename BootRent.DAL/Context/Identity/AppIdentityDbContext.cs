@@ -1,8 +1,11 @@
-﻿using BootRentSystem.Identity;
+﻿
+using BootRent.DAL.Data.DataTypes;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Address = BootRent.DAL.Data.Models.Identity.Address;
+using AppUser = BootRent.DAL.Data.Models.Identity.AppUser;
 
-namespace BootRentSystem.Context.Identity
+namespace BootRent.DAL.Context.Identity
 {
     public class AppIdentityDbContext :IdentityDbContext<AppUser>
     {
@@ -11,6 +14,7 @@ namespace BootRentSystem.Context.Identity
         public AppIdentityDbContext(DbContextOptions<AppIdentityDbContext> options) :base(options)
         {
         }
+        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -31,20 +35,26 @@ namespace BootRentSystem.Context.Identity
             new AppUser
             {
                 DisplayName = "MarwaMohamed",
-                Id = Guid.NewGuid().ToString()
-                
+                Id = Guid.NewGuid().ToString(),
+                UserType = UserType.Admin
+
+
             },
             new AppUser
             {
                 DisplayName = "SaraZaki",
-                 Id = Guid.NewGuid().ToString()
+                Id = Guid.NewGuid().ToString(),
+                UserType = UserType.User
+
 
 
         },
               new AppUser
             {
                 DisplayName = "MohamedSamy",
-                Id = Guid.NewGuid().ToString()
+                Id = Guid.NewGuid().ToString(),
+                UserType = UserType.BootOwner
+
 
 
         }
@@ -64,7 +74,6 @@ namespace BootRentSystem.Context.Identity
                         State = "Cairo",
                         Street = "ALGomhorya",
                         ZipCode = "4521",
-                        UserType = DataTypes.UserType.Admin
 
 
                     },
@@ -79,7 +88,6 @@ namespace BootRentSystem.Context.Identity
                         State = "Alex",
                         Street = "ALGomhorya",
                         ZipCode = "276",
-                        UserType = DataTypes.UserType.User
 
 
                     },new Address
@@ -94,7 +102,6 @@ namespace BootRentSystem.Context.Identity
                         Street = "ALGomhorya",
                         ZipCode = "135",
                        
-                        UserType = DataTypes.UserType.BootOwner
 
 
                     },

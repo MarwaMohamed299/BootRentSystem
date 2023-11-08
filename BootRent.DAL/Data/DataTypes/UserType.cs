@@ -1,8 +1,8 @@
-﻿namespace BootRentSystem.DataTypes
+﻿namespace BootRent.DAL.Data.DataTypes
 {
     public enum UserType
     {
-        Admin ,
+        Admin,
         BootOwner,
         User
     }
