@@ -28,7 +28,7 @@ namespace BootRent.DAL.Repo.Generics
             return await _rentContext.Set<T>().ToListAsync();
         }
 
-        public async Task<T>? GetById(Guid id)
+        public async Task<T>? GetById(int id)
         {
             return await _rentContext.Set<T>().FindAsync(id);
         }

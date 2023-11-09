@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BootRent.DAL.Repo.Reservations
 {
-    public interface IReservationRepo : IGenericRepo<IReservationRepo>
+    public interface IReservationRepo : IGenericRepo<Reservation>
     {
         IEnumerable<Reservation> GetAllReservations();
         Reservation? GetReservationById(Guid id);
@@ -17,5 +17,5 @@ namespace BootRent.DAL.Repo.Reservations
         void Delete(Reservation reservation);
         int SaveChanges();
     }
-   
+
 }

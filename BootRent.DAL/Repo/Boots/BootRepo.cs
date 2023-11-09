@@ -13,13 +13,6 @@ namespace BootRent.DAL.Repo.Boots
         }
 
 
-
-
-
-
-
-
-
         public void Add(Boot boot)
         {
              _rentContext.Set<Boot>().Add(boot);
