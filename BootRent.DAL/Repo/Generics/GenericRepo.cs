@@ -23,12 +23,12 @@ namespace BootRent.DAL.Repo.Generics
             _rentContext?.Set<T>().Remove(item);
         }
 
-        public async Task<IEnumerable<T>> GetAllBoots()
+        public async Task<IEnumerable<T>> GetAll()
         {
             return await _rentContext.Set<T>().ToListAsync();
         }
 
-        public async Task<T>? GetBootById(int id)
+        public async Task<T>? GetById(Guid id)
         {
             return await _rentContext.Set<T>().FindAsync(id);
         }

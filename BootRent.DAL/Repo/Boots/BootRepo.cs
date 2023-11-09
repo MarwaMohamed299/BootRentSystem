@@ -1,49 +1,55 @@
 ﻿using BootRent.DAL.Context.Rent;
 using BootRent.DAL.Data.Models;
+using BootRent.DAL.Repo.Generics;
 
 namespace BootRent.DAL.Repo.Boots
 {
-    public class BootRepo : IBootRepo
+    public class BootRepo : GenericRepo<Boot>, IBootRepo
     {
         private readonly RentContext _rentContext;
-
-        public BootRepo(RentContext rentContext)
+        public BootRepo(RentContext rentContext) :base (rentContext)
         {
             _rentContext = rentContext;
-
         }
-       
+
+
+
+
+
+
 
 
 
         public void Add(Boot boot)
         {
-            throw new NotImplementedException();
+             _rentContext.Set<Boot>().Add(boot);
         }
 
-        public void Delete(Boot boot)
+        public void Delete(Boot boots)
         {
-            throw new NotImplementedException();
+            _rentContext.Set<Boot>().Remove(boots);
         }
 
         public IEnumerable<Boot> GetAllBoots()
         {
-            throw new NotImplementedException();
+            return _rentContext.Set<Boot>().ToList();
+
         }
 
-        public Boot? GetBootById(Guid Id)
+        public Boot? GetBootById(Guid id)
         {
-            throw new NotImplementedException();
+            return _rentContext.Set<Boot>().Find(id);
+
         }
 
         public int SaveChanges()
         {
-            throw new NotImplementedException();
+            return _rentContext.SaveChanges();
+
         }
 
         public void Update(Boot boot)
         {
-            throw new NotImplementedException();
         }
     }
 }

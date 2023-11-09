@@ -7,11 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Dtos\Boots\" />
-    <Folder Include="Dtos\Reservations\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\BootRent.DAL\BootRent.DAL.csproj" />
   </ItemGroup>
 

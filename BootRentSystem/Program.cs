@@ -4,6 +4,8 @@ using BootRent.DAL.Context.Identity;
 using BootRent.DAL.Context.Rent;
 using BootRent.DAL.Data.Models.Identity;
 using BootRent.DAL.Repo.Boots;
+using BootRent.DAL.Repo.Reservations;
+using BootRent.DAL.UnitOfWork;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -72,12 +74,15 @@ namespace BootRentSystem
 
 
                     builder.Services.AddScoped<IBootRepo, BootRepo>();
+                    builder.Services.AddScoped<IReservationRepo, ReservationRepo>();
+                    builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 
 
-          
 
-                    var app = builder.Build();
+
+
+            var app = builder.Build();
 
                     // Configure the HTTP request pipeline.
                     if (app.Environment.IsDevelopment())
