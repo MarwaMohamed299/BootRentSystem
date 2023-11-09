@@ -1,5 +1,7 @@
 
 
+using BootRent.BL.Managers.Boos;
+using BootRent.BL.Managers.Reservations;
 using BootRent.DAL.Context.Identity;
 using BootRent.DAL.Context.Rent;
 using BootRent.DAL.Data.Models.Identity;
@@ -76,6 +78,11 @@ namespace BootRentSystem
                     builder.Services.AddScoped<IBootRepo, BootRepo>();
                     builder.Services.AddScoped<IReservationRepo, ReservationRepo>();
                     builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+
+                    builder.Services.AddScoped<IBootManager, BootManager>();
+                    builder.Services.AddScoped<IReservationManager, ReservationManager>();
+
 
 
 

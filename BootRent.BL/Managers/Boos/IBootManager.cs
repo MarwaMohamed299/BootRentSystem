@@ -12,7 +12,7 @@ namespace BootRent.BL.Managers.Boos
     {
         IEnumerable<BootReadDto> GetAllBoots();
         BootReadDto? GetBootById(Guid id);
-        System.Guid Add(BootReadDto bootReadDto);
+        System.Guid Add(BootAddDto bootAddDto);
         bool Update(BootUpdateDto bootUpdateDtos);
         bool Delete(Guid id);
 

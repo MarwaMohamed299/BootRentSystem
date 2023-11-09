@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BootRent.BL.Dtos.Reservations
 {
-    public class ReservaionAddDto
+    public class ReservationAddDto
     {
         public Guid ReservationId { get; set; }
 

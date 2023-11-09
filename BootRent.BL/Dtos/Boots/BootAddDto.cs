@@ -16,7 +16,7 @@ namespace BootRent.BL.Dtos.Boots
 
         public int ProductionYear { get; set; }
 
-        public bool IsAvailable { get; set; }
+        public bool CheckInDate { get; set; }
 
         public DateTime CreatedAt { get; set; }
     }

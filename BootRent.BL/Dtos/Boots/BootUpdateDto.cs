@@ -8,6 +8,7 @@ namespace BootRent.BL.Dtos.Boots
 {
     public class BootUpdateDto
     {
+        public Guid BootId { get;  }
 
         public string BootName { get; set; } = string.Empty;
 

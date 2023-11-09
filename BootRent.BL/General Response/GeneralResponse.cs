@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace BootRent.BL.General_Response
 {
-    internal class GeneralResponse
+    public class GeneralResponse
     {
+        public string Message { set; get; } = string.Empty;
+
+        public GeneralResponse(string message)
+        {
+            Message = message;
+        }
     }
 }
