@@ -25,6 +25,8 @@ namespace BootRent.BL.Managers.Reservations
 
                 CheckInDate = reservationFromRequest.CheckInDate,
                CheckOutDate = reservationFromRequest.CheckOutDate,
+               BootId = reservationFromRequest.BootId,
+               ReservationId=reservationFromRequest.ReservationId
 
                
 
@@ -54,7 +56,9 @@ namespace BootRent.BL.Managers.Reservations
             return reservationsFromDb.Select(R => new ReservationReadDto
             {
                 CheckInDate = R.CheckInDate,
-                CheckOutDate = R.CheckOutDate
+                CheckOutDate = R.CheckOutDate,
+                BootId =  R.BootId,
+                ReservationId=R.ReservationId
 
 
             });
@@ -72,7 +76,8 @@ namespace BootRent.BL.Managers.Reservations
             {
                 CheckInDate = reservationFromDb.CheckInDate,
                 CheckOutDate=reservationFromDb.CheckOutDate,
-                ReservationId=reservationFromDb.ReservationId
+                ReservationId=reservationFromDb.ReservationId,
+                BootId=reservationFromDb.BootId
             };
         }
 
@@ -85,6 +90,7 @@ namespace BootRent.BL.Managers.Reservations
             }
             reservation.CheckInDate = reservationFromRequest.CheckInDate;
             reservation.CheckOutDate = reservationFromRequest.CheckOutDate;
+            reservation.ReservationId = reservation.BootId;
           
             _reservationRepo.Update(reservation);
             _reservationRepo.SaveChanges();

@@ -28,22 +28,22 @@ namespace BootRent.DAL.Repo.Reservations
             return _rentContext.Set<Reservation>().Find(id);
         }
 
-        public new void Add(Reservation reservation)
+        public  void Add(Reservation reservation)
         {
             _rentContext.Set<Reservation>().Add(reservation);
         }
 
-        public new void Update(Reservation reservation)
+        public void Update(Reservation reservation)
         {
             _rentContext.Set<Reservation>().Update(reservation);
         }
 
-        public new void Delete(Reservation reservation)
+        public void Delete(Reservation reservation)
         {
             _rentContext.Set<Reservation>().Remove(reservation);
         }
 
-        public new int SaveChanges()
+        public int SaveChanges()
         {
             return _rentContext.SaveChanges();
         }

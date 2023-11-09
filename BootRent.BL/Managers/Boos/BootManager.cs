@@ -96,6 +96,8 @@ namespace BootRent.BL.Managers.Boos
             boot.ProductionYear = bootFromRequest.ProductionYear;
             boot.CreatedAt = bootFromRequest.CreatedAt;
             boot.IsAvailable = bootFromRequest.IsAvailable;
+            boot.BootId = bootFromRequest.BootId;
+
             _bootRepo.Update(boot);
             _bootRepo.SaveChanges();
             return true;

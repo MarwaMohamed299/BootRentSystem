@@ -9,6 +9,8 @@ namespace BootRent.BL.Dtos.Reservations
     public class ReservationAddDto
     {
         public Guid ReservationId { get; set; }
+        public Guid BootId { get; set; }
+
 
 
         public DateTime CheckInDate { get; set; }

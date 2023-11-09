@@ -23,19 +23,14 @@ namespace BootRent.DAL.UnitOfWork
         private readonly RentContext _rentContext;
 
 
-        public UnitOfWork                                   //ctor
-        (AppIdentityDbContext appIdentityDbContext,
-           RentContext rentContext,
-           BootRepo bootRepo,
-           ReservationRepo reservationRepo
-           )
+       
+        public UnitOfWork(AppIdentityDbContext appIdentityDbContext, RentContext rentContext, IBootRepo bootRepo, IReservationRepo reservationRepo)
         {
             _appIdentityDbContext = appIdentityDbContext;
             _rentContext = rentContext;
             BootRepo = bootRepo;
             ReservationRepo = reservationRepo;
         }
-
         public async Task<int> Save()
         {
             int rentContextChanges = await _rentContext.SaveChangesAsync();

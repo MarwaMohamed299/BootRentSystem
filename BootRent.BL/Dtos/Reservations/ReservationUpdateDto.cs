@@ -15,5 +15,7 @@ namespace BootRent.BL.Dtos.Reservations
 
 
         public DateTime CheckOutDate { get; set; }
+        public Guid BootId { get; set; }
+
     }
 }

@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 using Microsoft.IdentityModel.Tokens;
+using System.Data;
 using System.Text;
 
 namespace BootRentSystem
@@ -31,9 +32,6 @@ namespace BootRentSystem
 
             builder.Services.AddDbContext<AppIdentityDbContext>(options =>
             options.UseSqlServer(builder.Configuration.GetConnectionString("IdentityConnection")));
-
-            builder.Services.AddDbContext<RentContext>(options =>
-            options.UseSqlServer(builder.Configuration.GetConnectionString("RentConnection")));
 
 
 
@@ -74,13 +72,17 @@ namespace BootRentSystem
                     };
                     });
 
+            builder.Services.AddDbContext<RentContext>(options =>
+            options.UseSqlServer(builder.Configuration.GetConnectionString("RentConnection")));
 
-                    builder.Services.AddScoped<IBootRepo, BootRepo>();
+
+            builder.Services.AddScoped<IBootRepo, BootRepo>();
                     builder.Services.AddScoped<IReservationRepo, ReservationRepo>();
                     builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 
-                    builder.Services.AddScoped<IBootManager, BootManager>();
+
+            builder.Services.AddScoped<IBootManager, BootManager>();
                     builder.Services.AddScoped<IReservationManager, ReservationManager>();
 
 
