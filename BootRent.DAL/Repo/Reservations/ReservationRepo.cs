@@ -1,4 +1,4 @@
-﻿using BootRent.DAL.Context.Rent;
+﻿using BootRent.DAL.Data.Context.Rent;
 using BootRent.DAL.Data.Models;
 using BootRent.DAL.Repo.Generics;
 using System;

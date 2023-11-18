@@ -1,5 +1,5 @@
-﻿using BootRent.DAL.Context.Identity;
-using BootRent.DAL.Context.Rent;
+﻿using BootRent.DAL.Data.Context.Identity;
+using BootRent.DAL.Data.Context.Rent;
 using BootRent.DAL.Repo.Boots;
 using BootRent.DAL.Repo.Reservations;
 using System;

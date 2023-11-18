@@ -2,8 +2,8 @@
 
 using BootRent.BL.Managers.Boos;
 using BootRent.BL.Managers.Reservations;
-using BootRent.DAL.Context.Identity;
-using BootRent.DAL.Context.Rent;
+using BootRent.DAL.Data.Context.Identity;
+using BootRent.DAL.Data.Context.Rent;
 using BootRent.DAL.Data.Models.Identity;
 using BootRent.DAL.Repo.Boots;
 using BootRent.DAL.Repo.Reservations;
@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 using Microsoft.IdentityModel.Tokens;
-using System.Data;
+
 using System.Text;
 
 namespace BootRentSystem

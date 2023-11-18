@@ -31,8 +31,4 @@
   <Compile Update="$(MSBuildThisFileDirectory)obj\Debug\net7.0\BootRentSystem.AssemblyInfo.cs" />
 </ItemGroup>
 
-	<ItemGroup>
-    <Folder Include="Properties\Migrations\" />
-  </ItemGroup>
-
 </Project>

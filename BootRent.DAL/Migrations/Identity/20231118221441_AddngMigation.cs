@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace BootRent.DAL.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialIdentity : Migration
+    public partial class AddngMigation : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -34,6 +34,14 @@ namespace BootRent.DAL.Migrations
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     DisplayName = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     UserType = table.Column<int>(type: "int", nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LastName = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    City = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    E_mail = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Street = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    State = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ZipCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -71,32 +79,6 @@ namespace BootRent.DAL.Migrations
                         name: "FK_AspNetRoleClaims_AspNetRoles_RoleId",
                         column: x => x.RoleId,
                         principalTable: "AspNetRoles",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Address",
-                columns: table => new
-                {
-                    AddressId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FirstName = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    LastName = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    City = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    E_mail = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Street = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    State = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ZipCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    AppUserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Address", x => x.AddressId);
-                    table.ForeignKey(
-                        name: "FK_Address_AspNetUsers_AppUserId",
-                        column: x => x.AppUserId,
-                        principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -188,29 +170,13 @@ namespace BootRent.DAL.Migrations
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
-                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "DisplayName", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName", "UserType" },
+                columns: new[] { "Id", "AccessFailedCount", "City", "ConcurrencyStamp", "DisplayName", "E_mail", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "Password", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "State", "Street", "TwoFactorEnabled", "UserName", "UserType", "ZipCode" },
                 values: new object[,]
                 {
-                    { "21c2784b-19a7-4e80-8704-374a2c60eea5", 0, "f21cc4e4-acc1-423f-82a2-a5bfacc8091e", "MohamedSamy", null, false, false, null, null, null, null, null, false, "81f9378c-9400-4686-945f-fcbd40f5a83d", false, null, 1 },
-                    { "7e0cb59a-0d5c-4726-8ff1-3fd5f38b9ef5", 0, "6c9095c9-6763-44f3-aa49-21f92aca0cab", "SaraZaki", null, false, false, null, null, null, null, null, false, "97c4b230-acb9-42fe-b1b2-798c38e60a2a", false, null, 2 },
-                    { "7f6d6107-d9a9-4c1d-8ffc-078f16684770", 0, "3017411f-c81a-418f-b08f-656ad3b618fa", "MarwaMohamed", null, false, false, null, null, null, null, null, false, "4a6ef689-f197-47c6-975a-cbaeb46e1e15", false, null, 0 }
+                    { "03b53ce2-f95b-4083-8784-ca21b2b21f1b", 0, "Egypt", "3f1f1d07-b05b-4667-a0c7-9258bc02dcd1", "SaraZaki", "Sara@gmail.com", null, false, "Sara", "Zaki", false, null, null, null, "jnjvkf@2153", null, null, false, "2f3fe0f7-0429-48fe-8620-6392eb88c0b2", "Alex", "ALGomhorya", false, null, 2, "276" },
+                    { "3c861373-1c0a-4626-bfe6-042a93a294d6", 0, "Egypt", "34fe2a93-da53-4d72-b566-7cd4ebb64b14", "MohamedSamy", "Mohamed@gmail.com", null, false, "Mohamed", "Samy", false, null, null, null, "jndjvkf@2153", null, null, false, "22663a2d-09e6-4683-9ca4-971a34900db2", "NorthCoast", "ALGomhorya", false, null, 1, "135" },
+                    { "7b802076-82a3-450c-92fa-145bc934ff85", 0, "Egypt", "e7cbaaef-3885-4b39-85a7-4b970f63f0ff", "MarwaMohamed", "Marwa@gmail.com", null, false, "Marwa", "Mohamed", false, null, null, null, "jndjvijikgkf@2153", null, null, false, "0bf41b47-67fa-4deb-84ee-e8020ac8b951", "Cairo", "ALGomhorya", false, null, 0, "4521" }
                 });
-
-            migrationBuilder.InsertData(
-                table: "Address",
-                columns: new[] { "AddressId", "AppUserId", "City", "E_mail", "FirstName", "LastName", "Password", "State", "Street", "ZipCode" },
-                values: new object[,]
-                {
-                    { new Guid("69b3f400-bc65-411a-8f38-ee1d4f9d0ceb"), "21c2784b-19a7-4e80-8704-374a2c60eea5", "Egypt", "Mohamed@gmail.com", "Mohamed", "Samy", "jndjvkf@2153", "NorthCoast", "ALGomhorya", "135" },
-                    { new Guid("aa293b67-39eb-4c86-9e85-b5762093676c"), "7f6d6107-d9a9-4c1d-8ffc-078f16684770", "Egypt", "Marwa@gmail.com", "Marwa", "Mohamed", "jndjvijikgkf@2153", "Cairo", "ALGomhorya", "4521" },
-                    { new Guid("f8ec8868-6e28-4774-a82a-6930d801d4c9"), "7e0cb59a-0d5c-4726-8ff1-3fd5f38b9ef5", "Egypt", "Sara@gmail.com", "Sara", "Zaki", "jnjvkf@2153", "Alex", "ALGomhorya", "276" }
-                });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Address_AppUserId",
-                table: "Address",
-                column: "AppUserId",
-                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -255,9 +221,6 @@ namespace BootRent.DAL.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "Address");
-
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 

@@ -33,18 +33,16 @@ namespace BootRentSystem.Controllers.AppUsers
         {
             var newAppUser = new AppUser
             {
-                DisplayName = registerDto.DisplayName,
+                UserName = registerDto.UserName,
                 UserType = registerDto.UserType,
+                FirstName = registerDto.FirstName,
+                LastName = registerDto.LastName,
+                City = registerDto.City,
+                Street = registerDto.Street,
+                State = registerDto.State,
+                Email = registerDto.Email
 
-                Address = new Address
-                {
-                    FirstName = registerDto.FirstName,
-                    LastName = registerDto.LastName,
-                    City = registerDto.City,
-                    Street = registerDto.Street,
-                    State = registerDto.State,
-                    E_mail = registerDto.Email
-                }
+               
 
             };
             var RegisterResult = await _userManager.CreateAsync(newAppUser, registerDto.Password);
@@ -66,7 +64,6 @@ namespace BootRentSystem.Controllers.AppUsers
                 {
                     new Claim(ClaimTypes.NameIdentifier,  newAppUser.DisplayName),
                     new Claim(ClaimTypes.Email,  newAppUser.Email),
-                    new Claim("Nationality", "Egyptian"),
                     new Claim (ClaimTypes.Role ,newAppUser.UserType.ToString())
                 };
                 await _userManager.AddClaimsAsync(newAppUser, userClaims);

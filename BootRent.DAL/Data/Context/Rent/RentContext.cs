@@ -2,17 +2,17 @@
 using Microsoft.EntityFrameworkCore;
 
 
-namespace BootRent.DAL.Context.Rent
+namespace BootRent.DAL.Data.Context.Rent
 {
     public class RentContext : DbContext
     {
         public DbSet<Boot> Boots => Set<Boot>();
         public DbSet<Reservation> Reservations => Set<Reservation>();
 
-        public RentContext( DbContextOptions<RentContext> options) :base (options)
+        public RentContext(DbContextOptions<RentContext> options) : base(options)
         {
         }
-        
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -28,9 +28,9 @@ namespace BootRent.DAL.Context.Rent
             modelBuilder.Entity<Reservation>().HasOne(b => b.Boot).WithMany(r => r.Reservations).
                 HasForeignKey(b => b.BootId).OnDelete(DeleteBehavior.NoAction);
 
-           
+
         }
-    
+
 
     }
 }
