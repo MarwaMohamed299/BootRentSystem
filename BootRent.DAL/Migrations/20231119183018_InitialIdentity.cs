@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace BootRent.DAL.Migrations
 {
     /// <inheritdoc />
-    public partial class AddngMigation : Migration
+    public partial class InitialIdentity : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -37,11 +37,11 @@ namespace BootRent.DAL.Migrations
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     City = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    E_mail = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Street = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     State = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ZipCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Otp = table.Column<int>(type: "int", nullable: true),
+                    OtpAge = table.Column<DateTime>(type: "datetime2", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -170,12 +170,12 @@ namespace BootRent.DAL.Migrations
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
-                columns: new[] { "Id", "AccessFailedCount", "City", "ConcurrencyStamp", "DisplayName", "E_mail", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "Password", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "State", "Street", "TwoFactorEnabled", "UserName", "UserType", "ZipCode" },
+                columns: new[] { "Id", "AccessFailedCount", "City", "ConcurrencyStamp", "DisplayName", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "Otp", "OtpAge", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "State", "Street", "TwoFactorEnabled", "UserName", "UserType", "ZipCode" },
                 values: new object[,]
                 {
-                    { "03b53ce2-f95b-4083-8784-ca21b2b21f1b", 0, "Egypt", "3f1f1d07-b05b-4667-a0c7-9258bc02dcd1", "SaraZaki", "Sara@gmail.com", null, false, "Sara", "Zaki", false, null, null, null, "jnjvkf@2153", null, null, false, "2f3fe0f7-0429-48fe-8620-6392eb88c0b2", "Alex", "ALGomhorya", false, null, 2, "276" },
-                    { "3c861373-1c0a-4626-bfe6-042a93a294d6", 0, "Egypt", "34fe2a93-da53-4d72-b566-7cd4ebb64b14", "MohamedSamy", "Mohamed@gmail.com", null, false, "Mohamed", "Samy", false, null, null, null, "jndjvkf@2153", null, null, false, "22663a2d-09e6-4683-9ca4-971a34900db2", "NorthCoast", "ALGomhorya", false, null, 1, "135" },
-                    { "7b802076-82a3-450c-92fa-145bc934ff85", 0, "Egypt", "e7cbaaef-3885-4b39-85a7-4b970f63f0ff", "MarwaMohamed", "Marwa@gmail.com", null, false, "Marwa", "Mohamed", false, null, null, null, "jndjvijikgkf@2153", null, null, false, "0bf41b47-67fa-4deb-84ee-e8020ac8b951", "Cairo", "ALGomhorya", false, null, 0, "4521" }
+                    { "bb89e605-60e3-45e5-95b7-d3d28c7edb4d", 0, "Egypt", "1a063baa-19a6-428d-8c13-757237741651", "MohamedSamy", null, false, "Mohamed", "Samy", false, null, null, null, null, null, null, null, false, "b0e4838e-cbd0-411e-85ea-c683a22f4d18", "NorthCoast", "ALGomhorya", false, null, 1, "135" },
+                    { "e5f93310-79b8-4f93-b376-847ec31f6e93", 0, "Egypt", "31bbaccd-1597-40ea-88f6-49153349546e", "MarwaMohamed", null, false, "Marwa", "Mohamed", false, null, null, null, null, null, null, null, false, "c73b57ad-e938-4f14-99ec-b9d66f5ab925", "Cairo", "ALGomhorya", false, null, 0, "4521" },
+                    { "f6225d74-504a-49cf-87ac-05ca3e32d0dd", 0, "Egypt", "40c24674-1d32-4ad5-bc06-10102ed3594b", "SaraZaki", null, false, "Sara", "Zaki", false, null, null, null, null, null, null, null, false, "c2bbe8a3-5d30-4389-a8da-f88bafbb6516", "Alex", "ALGomhorya", false, null, 2, "276" }
                 });
 
             migrationBuilder.CreateIndex(

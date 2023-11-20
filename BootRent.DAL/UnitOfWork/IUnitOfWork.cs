@@ -12,7 +12,7 @@ namespace BootRent.DAL.UnitOfWork
     {
         public IBootRepo BootRepo { get; }
         public IReservationRepo ReservationRepo{ get; }
-         Task<int> Save();
+         Task<int> SaveChangesAsync();
 
     }
 }

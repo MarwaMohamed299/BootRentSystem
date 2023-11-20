@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BootRent.DAL.Migrations
 {
     [DbContext(typeof(AppIdentityDbContext))]
-    [Migration("20231118221441_AddngMigation")]
-    partial class AddngMigation
+    [Migration("20231119183018_InitialIdentity")]
+    partial class InitialIdentity
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -47,10 +47,6 @@ namespace BootRent.DAL.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
-                    b.Property<string>("E_mail")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -81,9 +77,11 @@ namespace BootRent.DAL.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("Otp")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("OtpAge")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("PasswordHash")
                         .HasColumnType("nvarchar(max)");
@@ -134,19 +132,17 @@ namespace BootRent.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "7b802076-82a3-450c-92fa-145bc934ff85",
+                            Id = "e5f93310-79b8-4f93-b376-847ec31f6e93",
                             AccessFailedCount = 0,
                             City = "Egypt",
-                            ConcurrencyStamp = "e7cbaaef-3885-4b39-85a7-4b970f63f0ff",
+                            ConcurrencyStamp = "31bbaccd-1597-40ea-88f6-49153349546e",
                             DisplayName = "MarwaMohamed",
-                            E_mail = "Marwa@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Marwa",
                             LastName = "Mohamed",
                             LockoutEnabled = false,
-                            Password = "jndjvijikgkf@2153",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "0bf41b47-67fa-4deb-84ee-e8020ac8b951",
+                            SecurityStamp = "c73b57ad-e938-4f14-99ec-b9d66f5ab925",
                             State = "Cairo",
                             Street = "ALGomhorya",
                             TwoFactorEnabled = false,
@@ -155,19 +151,17 @@ namespace BootRent.DAL.Migrations
                         },
                         new
                         {
-                            Id = "03b53ce2-f95b-4083-8784-ca21b2b21f1b",
+                            Id = "f6225d74-504a-49cf-87ac-05ca3e32d0dd",
                             AccessFailedCount = 0,
                             City = "Egypt",
-                            ConcurrencyStamp = "3f1f1d07-b05b-4667-a0c7-9258bc02dcd1",
+                            ConcurrencyStamp = "40c24674-1d32-4ad5-bc06-10102ed3594b",
                             DisplayName = "SaraZaki",
-                            E_mail = "Sara@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Sara",
                             LastName = "Zaki",
                             LockoutEnabled = false,
-                            Password = "jnjvkf@2153",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "2f3fe0f7-0429-48fe-8620-6392eb88c0b2",
+                            SecurityStamp = "c2bbe8a3-5d30-4389-a8da-f88bafbb6516",
                             State = "Alex",
                             Street = "ALGomhorya",
                             TwoFactorEnabled = false,
@@ -176,19 +170,17 @@ namespace BootRent.DAL.Migrations
                         },
                         new
                         {
-                            Id = "3c861373-1c0a-4626-bfe6-042a93a294d6",
+                            Id = "bb89e605-60e3-45e5-95b7-d3d28c7edb4d",
                             AccessFailedCount = 0,
                             City = "Egypt",
-                            ConcurrencyStamp = "34fe2a93-da53-4d72-b566-7cd4ebb64b14",
+                            ConcurrencyStamp = "1a063baa-19a6-428d-8c13-757237741651",
                             DisplayName = "MohamedSamy",
-                            E_mail = "Mohamed@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Mohamed",
                             LastName = "Samy",
                             LockoutEnabled = false,
-                            Password = "jndjvkf@2153",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "22663a2d-09e6-4683-9ca4-971a34900db2",
+                            SecurityStamp = "b0e4838e-cbd0-411e-85ea-c683a22f4d18",
                             State = "NorthCoast",
                             Street = "ALGomhorya",
                             TwoFactorEnabled = false,

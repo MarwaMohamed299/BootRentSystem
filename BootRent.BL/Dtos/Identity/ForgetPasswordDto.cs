@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BootRent.BL.Managers.AppUsers
+namespace BootRent.BL.Dtos.Identity
 {
-    public class UsersManager :IUserManager
+    public class ForgetPasswordDto
     {
+        public string Email { get; set; } = string.Empty;
+
     }
 }

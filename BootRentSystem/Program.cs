@@ -1,10 +1,13 @@
 
 
+using BootRent.BL.Managers.AppUsers;
 using BootRent.BL.Managers.Boos;
 using BootRent.BL.Managers.Reservations;
+using BootRent.BL.Services.MailingService;
 using BootRent.DAL.Data.Context.Identity;
 using BootRent.DAL.Data.Context.Rent;
 using BootRent.DAL.Data.Models.Identity;
+using BootRent.DAL.Repo;
 using BootRent.DAL.Repo.Boots;
 using BootRent.DAL.Repo.Reservations;
 using BootRent.DAL.UnitOfWork;
@@ -77,13 +80,19 @@ namespace BootRentSystem
 
 
             builder.Services.AddScoped<IBootRepo, BootRepo>();
-                    builder.Services.AddScoped<IReservationRepo, ReservationRepo>();
-                    builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+            builder.Services.AddScoped<IReservationRepo, ReservationRepo>();
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+            builder.Services.Configure<MailingSettings>(builder.Configuration.GetSection("MailSetting"));
+            builder.Services.AddTransient<IMailingService, MailingService>();
+            builder.Services.AddScoped<IUserRepo, UserRepo>();
+
+
 
 
 
             builder.Services.AddScoped<IBootManager, BootManager>();
-                    builder.Services.AddScoped<IReservationManager, ReservationManager>();
+            builder.Services.AddScoped<IReservationManager, ReservationManager>();
+            builder.Services.AddScoped<IUserManager, UserManager>();
 
 
 

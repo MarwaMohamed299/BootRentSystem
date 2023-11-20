@@ -38,8 +38,8 @@ namespace BootRent.DAL.Data.Context.Identity
                         State = "Cairo",
                         Street = "ALGomhorya",
                         ZipCode = "4521",
-                         Password = "jndjvijikgkf@2153",
-                        E_mail = "Marwa@gmail.com"
+                        // Password = "jndjvijikgkf@2153",
+                        //E_mail = "Marwa@gmail.com"
 
 
 
@@ -58,8 +58,8 @@ namespace BootRent.DAL.Data.Context.Identity
                         State = "Alex",
                         Street = "ALGomhorya",
                         ZipCode = "276",
-                        Password = "jnjvkf@2153",
-                        E_mail = "Sara@gmail.com"
+                        //Password = "jnjvkf@2153",
+                        //E_mail = "Sara@gmail.com"
 
 
 
@@ -76,8 +76,8 @@ namespace BootRent.DAL.Data.Context.Identity
                         State = "NorthCoast",
                         Street = "ALGomhorya",
                         ZipCode = "135",
-                        Password = "jndjvkf@2153",
-                        E_mail = "Mohamed@gmail.com"
+                        //Password = "jndjvkf@2153",
+                        //E_mail = "Mohamed@gmail.com"
 
 
 

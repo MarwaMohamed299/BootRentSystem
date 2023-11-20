@@ -31,7 +31,7 @@ namespace BootRent.DAL.UnitOfWork
             BootRepo = bootRepo;
             ReservationRepo = reservationRepo;
         }
-        public async Task<int> Save()
+        public async Task<int> SaveChangesAsync()
         {
             int rentContextChanges = await _rentContext.SaveChangesAsync();
             int appIdentityDbContextChanges = await _appIdentityDbContext.SaveChangesAsync();
