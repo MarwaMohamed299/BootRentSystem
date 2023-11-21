@@ -211,65 +211,133 @@ namespace BootRentSystem.Controllers.AppUsers
 
 
         [HttpPost]
-        [Route("Confirm-Email")]
-        public async Task<ActionResult<UserManagerResponse>> ConfirmEmail(int otp)
+        [Route("Confirm-OTP")]
+        public async Task<ActionResult<UserManagerResponse>> ConfirmOTP(int otp)
         {
-            //try
-            //  {
-
-            //Check if OTP is Valid
-            //var Time = DateTime.Now - otpGenerationTime;
-            //if (Time.TotalMinutes > 10)
-            //{
-            //    return new UserManagerResponse
-            //    {
-            //        Message = "OTP has expired. Please request a new one.",
-            //        IsSuccess = false
-            //    };
-
-            //}
-
-
-            var ValidatedOTP = await _userRepo.RetrieveEmailWithOTP(otp);
-
-            if (ValidatedOTP == -1)
+            try
             {
+
+
+
+
+                var ValidatedOTP = await _userRepo.RetrieveEmailWithOTP(otp);
+
+                if (ValidatedOTP == -1)
+                {
+                    return new UserManagerResponse
+                    {
+                        Message = "Invalid OTP or OTP has expired. Please request a new one.",
+                        IsSuccess = false
+                    };
+                }
+                if (ValidatedOTP == otp && ValidatedOTP != -1)
+                {
+                    return new UserManagerResponse
+                    {
+                        Message = "Validated OTP",
+                        IsSuccess = true
+                    };
+                }
                 return new UserManagerResponse
                 {
-                    Message = "Invalid OTP or OTP has expired. Please request a new one.",
+                    Message = "Unexpected condition occurred.",
                     IsSuccess = false
                 };
             }
-            if (ValidatedOTP == otp && ValidatedOTP != -1)
+
+            catch (Exception ex)
+            {
+                // Return an error response in case of an exception
+                return new UserManagerResponse
+                {
+                    IsSuccess = false,
+                    Message = $"An error occurred: {ex.Message}"
+                };
+            }
+
+
+
+
+
+
+        }
+        [HttpPost]
+        [Route("Reset-Password")]
+        public async Task<ActionResult<UserManagerResponse>> ResetPassword(ResetPasswordDto resetPasswordDto)
+        {
+            try
+            {
+                try
+                {
+                    var mailAddress = new System.Net.Mail.MailAddress(resetPasswordDto.Email);
+                }
+                catch (FormatException)
+                {
+                    throw new ArgumentException("Invalid email address format.");
+                }
+
+
+                 AppUser ? appUser = await _userManager.FindByEmailAsync(resetPasswordDto.Email);
+
+                if (appUser == null)
+                {
+                    return new UserManagerResponse
+                    {
+                        Message = "User not found.",
+                        IsSuccess = false
+                    };
+                }
+
+
+                if (resetPasswordDto.NewPassword != resetPasswordDto.ConfirmNewPassword)
+                {
+                    return new UserManagerResponse
+                    {
+                        Message = "Passwored Dosen't Match Confirmation!!!",
+                        IsSuccess = false,
+                    };
+                }
+                // Change the password
+                var token = await _userManager.GeneratePasswordResetTokenAsync(appUser);
+                var result = await _userManager.ResetPasswordAsync(appUser, token, resetPasswordDto.NewPassword);
+
+
+                //await _userRepo.SaveChangesAsync();
+                if (!result.Succeeded)
+                {
+                    return new UserManagerResponse
+                    {
+                        Message = "Failed to reset password.",
+                        IsSuccess = false,
+                    };
+                }
+                return new UserManagerResponse
+                {
+                    Message = "Reset Password Successfully!!!",
+                    IsSuccess = true,
+                };
+            }
+            catch (Exception ex)
             {
                 return new UserManagerResponse
                 {
-                    Message = "Validated OTP",
-                    IsSuccess = true
+                    Message = ex.Message,
+                    IsSuccess = false,
                 };
             }
-            return new UserManagerResponse
-            {
-                Message = "Unexpected condition occurred.",
-                IsSuccess = false
-            };
-            //  }
 
-            //catch (Exception ex)
-            //{
-            //    //// Return an error response in case of an exception
-            //    //return new UserManagerResponse
-            //    //{
-            //    //    IsSuccess = false,
-            //    //    Message = $"An error occurred: {ex.Message}"
-            //    };
-            //}
         }
+           
+        }
+
+
+
+
     }
 
 
 
-      }
+
 
 
     
