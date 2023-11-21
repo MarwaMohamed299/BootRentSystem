@@ -1,16 +1,13 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.HttpResults;
+﻿
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using BootRent.DAL;
 using BootRent.DAL.Data.Models.Identity;
 using BootRent.BL.Dtos.Identity;
 using BootRent.DAL.Response;
-using System.Security.Cryptography;
 using BootRent.DAL.Data.Context.Identity;
 using Microsoft.EntityFrameworkCore;
 using BootRent.DAL.Repo;

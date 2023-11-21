@@ -77,7 +77,6 @@ namespace BootRent.BL.Managers.Reservations
                 CheckInDate = reservationFromDb.CheckInDate,
                 CheckOutDate=reservationFromDb.CheckOutDate,
                 ReservationId=reservationFromDb.ReservationId,
-                BootId=reservationFromDb.BootId
             };
         }
 

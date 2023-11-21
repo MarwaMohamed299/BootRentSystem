@@ -17,12 +17,12 @@ namespace BootRentSystem.Controllers.Reservation
         {
             _reservationManager = reservationManager;
         }
-        [HttpGet]
-        [Authorize]
 
+        [HttpGet]
         public ActionResult<List<ReservationReadDto>> GetAll()
         {
-            return _reservationManager.GetAllReservations().ToList();
+            var reservations = _reservationManager.GetAllReservations().ToList();
+            return Ok(reservations);
         }
 
 
@@ -30,49 +30,42 @@ namespace BootRentSystem.Controllers.Reservation
         [Route("{id}")]
         public ActionResult<ReservationReadDto> GetReservationById(Guid id)
         {
-            ReservationReadDto? reservation = _reservationManager.GetReservationById(id);
-            if (reservation is null)
+            var reservation = _reservationManager.GetReservationById(id);
+            if (reservation == null)
             {
                 return NotFound();
             }
-            return reservation;
+            return Ok(reservation);
         }
 
         [HttpPost]
-        public ActionResult Add(ReservationAddDto reservationDto)
+        public ActionResult Add([FromBody] ReservationAddDto reservationDto)
         {
             var newId = _reservationManager.Add(reservationDto);
-
-            return CreatedAtAction(nameof(GetReservationById),
-                new { id = newId },
-                new GeneralResponse("Reservation Has Been Added Successfully!"));
-
+            return CreatedAtAction(nameof(GetReservationById), new { id = newId }, new GeneralResponse("Reservation has been added successfully!"));
         }
 
         [HttpPut]
-        public ActionResult Update(ReservationUpdateDto reservationDto)
-
+        public ActionResult Update([FromBody] ReservationUpdateDto reservationDto)
         {
-            var isFound = _reservationManager.Update(reservationDto);
-            if (!isFound)
+            var isUpdated = _reservationManager.Update(reservationDto);
+            if (!isUpdated)
             {
                 return NotFound();
             }
-            return Ok("Reservation is Updated Successfully");
+            return Ok("Reservation is updated successfully");
         }
 
-        [HttpDelete]
-        [Route("{id}")]
+        [HttpDelete("{id}")]
         public ActionResult Delete(Guid id)
         {
-            var isFound = _reservationManager.Delete(id);
-            if (!isFound)
+            var isDeleted = _reservationManager.Delete(id);
+            if (!isDeleted)
             {
                 return NotFound();
-
             }
-            return Ok("Product is Deleted Successfully");
-
+            return Ok("Reservation is deleted successfully");
         }
     }
+
 }
