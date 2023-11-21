@@ -12,7 +12,7 @@ namespace BootRent.DAL.Repo
     public  interface IUserRepo
     {
        Task<int> RetrieveEmailWithOTP(int otp);
-
+        Task<int> SaveChangesAsync();
     }
     public class UserRepo : IUserRepo
     {
@@ -24,12 +24,28 @@ namespace BootRent.DAL.Repo
         }
         public async Task<int> RetrieveEmailWithOTP(int otp)
         {
-            var OTP = await _appIdentityDbContext.appUsers
-                .Where(x => x.Otp == otp && x.OtpAge.HasValue && x.OtpAge.Value.AddMinutes(10) > DateTime.Now)
+            var ValidOTP = await _appIdentityDbContext.appUsers
+                .Where(x => x.Otp == otp && x.OtpAge.HasValue && x.OtpAge!.Value.AddMinutes(10) > DateTime.Now)
                 .Select(x => x.Otp)
                 .FirstOrDefaultAsync();
 
-            return otp;
+            // Check if ValidOTP has no value
+            if (!ValidOTP.HasValue)
+            {
+                return -1;
+            }
+
+            return ValidOTP.Value;
         }
+
+
+
+        public async Task<int> SaveChangesAsync()
+        {
+            return await _appIdentityDbContext.SaveChangesAsync();
+        }
+
+
+
     }
 }

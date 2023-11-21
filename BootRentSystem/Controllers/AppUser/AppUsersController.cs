@@ -30,7 +30,7 @@ namespace BootRentSystem.Controllers.AppUsers
         private readonly IMailingService _mailingService;
         private readonly IUserManager _userManager1;
 
-        public AppUsersController(IConfiguration configuration, UserManager<AppUser> userManager,IUserManager userManager1, AppIdentityDbContext appUserDbContext, IMailingService mailService,IUserRepo userRepo)
+        public AppUsersController(IConfiguration configuration, UserManager<AppUser> userManager, IUserManager userManager1, AppIdentityDbContext appUserDbContext, IMailingService mailService, IUserRepo userRepo)
         {
             _configuration = configuration;
             _userManager = userManager;
@@ -160,11 +160,11 @@ namespace BootRentSystem.Controllers.AppUsers
                     throw new ArgumentException("Invalid email address format.");
                 }
 
-                
+
 
 
                 var AppUser = await _appUserDbContext.appUsers.FirstOrDefaultAsync(X => X.Email == forgetPasswordDto.Email);
-              
+
                 //Check user email is exist 
                 if (AppUser == null)
                     return new UserManagerResponse
@@ -176,21 +176,18 @@ namespace BootRentSystem.Controllers.AppUsers
                 var random = new Random();
                 var OTP = random.Next(1000, 9999);
                 var otpGenerationTime = DateTime.Now;
+
+
+                AppUser.Otp = OTP;
+                AppUser.OtpAge = otpGenerationTime;
+
+
+                await _userRepo.SaveChangesAsync();
                 //SendEmailWithOTP
 
                 var EmailToBeSent = await _mailingService.SendEmail(forgetPasswordDto.Email, OTP);
 
-                ////Check if OTP is Valid
-                //var Time = DateTime.Now - otpGenerationTime;
-                //if (Time.TotalMinutes > 10)
-                //{
-                //    return new UserManagerResponse
-                //    {
-                //        Message = "OTP has expired. Please request a new one.",
-                //        IsSuccess = false
-                //    };
-
-                //}
+               
                 return new UserManagerResponse
                 {
                     Message = "EmailWith OTP is Sent Please Use It to reset Your Password",
@@ -215,52 +212,66 @@ namespace BootRentSystem.Controllers.AppUsers
 
         [HttpPost]
         [Route("Confirm-Email")]
-        public async Task<ActionResult<UserManagerResponse>> ConfirmEmail( int otp)
+        public async Task<ActionResult<UserManagerResponse>> ConfirmEmail(int otp)
         {
-            try
-            {
-                var ValidatedOTP = await _userRepo.RetrieveEmailWithOTP(otp);
+            //try
+            //  {
 
-                if (ValidatedOTP == -1)
-                {
-                    return new UserManagerResponse
-                    {
-                        Message = "Invalid OTP or OTP has expired. Please request a new one.",
-                        IsSuccess = false
-                    };
-                }
-                if (ValidatedOTP == otp)
-                {
-                    return new UserManagerResponse
-                    {
-                        Message = "Validated OTP",
-                        IsSuccess = true
-                    };
-                }
+            //Check if OTP is Valid
+            //var Time = DateTime.Now - otpGenerationTime;
+            //if (Time.TotalMinutes > 10)
+            //{
+            //    return new UserManagerResponse
+            //    {
+            //        Message = "OTP has expired. Please request a new one.",
+            //        IsSuccess = false
+            //    };
+
+            //}
+
+
+            var ValidatedOTP = await _userRepo.RetrieveEmailWithOTP(otp);
+
+            if (ValidatedOTP == -1)
+            {
                 return new UserManagerResponse
                 {
-                    Message = "Unexpected condition occurred.",
+                    Message = "Invalid OTP or OTP has expired. Please request a new one.",
                     IsSuccess = false
                 };
             }
-            
-            catch (Exception ex)
+            if (ValidatedOTP == otp && ValidatedOTP != -1)
             {
-                // Return an error response in case of an exception
                 return new UserManagerResponse
                 {
-                    IsSuccess = false,
-                    Message = $"An error occurred: {ex.Message}"
+                    Message = "Validated OTP",
+                    IsSuccess = true
                 };
             }
+            return new UserManagerResponse
+            {
+                Message = "Unexpected condition occurred.",
+                IsSuccess = false
+            };
+            //  }
+
+            //catch (Exception ex)
+            //{
+            //    //// Return an error response in case of an exception
+            //    //return new UserManagerResponse
+            //    //{
+            //    //    IsSuccess = false,
+            //    //    Message = $"An error occurred: {ex.Message}"
+            //    };
+            //}
         }
-
-
-
-
-        }
-
-
     }
+
+
+
+      }
+
+
+    
 
 
