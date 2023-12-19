@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BootRent.DAL.Migrations.Rent
 {
     [DbContext(typeof(RentContext))]
-    [Migration("20231118222200_InitialRent")]
-    partial class InitialRent
+    [Migration("20231219210858_AddingSeeding")]
+    partial class AddingSeeding
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,7 +27,7 @@ namespace BootRent.DAL.Migrations.Rent
 
             modelBuilder.Entity("BootRent.DAL.Data.Models.Boot", b =>
                 {
-                    b.Property<Guid>("BootId")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
@@ -48,14 +48,35 @@ namespace BootRent.DAL.Migrations.Rent
                     b.Property<int>("ProductionYear")
                         .HasColumnType("int");
 
-                    b.HasKey("BootId");
+                    b.HasKey("Id");
 
                     b.ToTable("Boots");
                 });
 
+            modelBuilder.Entity("BootRent.DAL.Data.Models.Package", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PackageName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Packages");
+                });
+
             modelBuilder.Entity("BootRent.DAL.Data.Models.Reservation", b =>
                 {
-                    b.Property<Guid>("ReservationId")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
@@ -68,11 +89,22 @@ namespace BootRent.DAL.Migrations.Rent
                     b.Property<DateTime>("CheckOutDate")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("ReservationId");
+                    b.HasKey("Id");
 
                     b.HasIndex("BootId");
 
                     b.ToTable("Reservations");
+                });
+
+            modelBuilder.Entity("BootRent.DAL.Data.Models.Package", b =>
+                {
+                    b.HasOne("BootRent.DAL.Data.Models.Reservation", "Reservation")
+                        .WithOne("Package")
+                        .HasForeignKey("BootRent.DAL.Data.Models.Package", "Id")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Reservation");
                 });
 
             modelBuilder.Entity("BootRent.DAL.Data.Models.Reservation", b =>
@@ -89,6 +121,11 @@ namespace BootRent.DAL.Migrations.Rent
             modelBuilder.Entity("BootRent.DAL.Data.Models.Boot", b =>
                 {
                     b.Navigation("Reservations");
+                });
+
+            modelBuilder.Entity("BootRent.DAL.Data.Models.Reservation", b =>
+                {
+                    b.Navigation("Package");
                 });
 #pragma warning restore 612, 618
         }

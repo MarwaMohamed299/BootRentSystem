@@ -4,7 +4,7 @@ namespace BootRent.DAL.Data.Models
 {
     public class Reservation
     {
-        public Guid ReservationId { get; set; }
+        public Guid Id { get; set; }
 
         [Required(ErrorMessage = "CheckInDate is required.")]
         [DataType(DataType.DateTime)]
@@ -17,5 +17,9 @@ namespace BootRent.DAL.Data.Models
         //NavProp
         public Guid BootId { get; set; }
         public Boot? Boot { get; set; }
+        public Package? Package { get; set; }
+        public Guid PackageId { get; set; }
+
+
     }
 }

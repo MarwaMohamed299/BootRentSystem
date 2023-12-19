@@ -76,8 +76,7 @@ namespace BootRent.DAL.Data.Context.Identity
                         State = "NorthCoast",
                         Street = "ALGomhorya",
                         ZipCode = "135",
-                        //Password = "jndjvkf@2153",
-                        //E_mail = "Mohamed@gmail.com"
+                        
 
 
 

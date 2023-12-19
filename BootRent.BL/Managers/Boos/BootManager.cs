@@ -26,7 +26,7 @@ namespace BootRent.BL.Managers.Boos
             {
 
                 IsAvailable = bootFromRequest.CheckInDate,
-                BootId = bootFromRequest.BootId,
+                Id = bootFromRequest.BootId,
                 Manufacturer = bootFromRequest.Manufacturer,
                 BootName = bootFromRequest.BootName,
                 ProductionYear = bootFromRequest.ProductionYear,
@@ -35,7 +35,7 @@ namespace BootRent.BL.Managers.Boos
             };
             _bootRepo.Add(boot);
             _bootRepo.SaveChanges();
-            return boot.BootId;
+            return boot.Id;
 
         }
 
@@ -58,7 +58,7 @@ namespace BootRent.BL.Managers.Boos
         return bootsFromDb.Select(B => new BootReadDto
         {
             IsAvailable = B.IsAvailable,
-            BootId =B.BootId,
+            BootId =B.Id,
             Manufacturer = B.Manufacturer,
             BootName = B.BootName,
             ProductionYear = B.ProductionYear,
@@ -76,7 +76,7 @@ namespace BootRent.BL.Managers.Boos
         return new BootReadDto
         {
             IsAvailable = bootFromDb.IsAvailable,
-            BootId = bootFromDb.BootId,
+            BootId = bootFromDb.Id,
             Manufacturer = bootFromDb.Manufacturer,
             BootName = bootFromDb.BootName,
             ProductionYear = bootFromDb.ProductionYear,
@@ -96,7 +96,7 @@ namespace BootRent.BL.Managers.Boos
             boot.ProductionYear = bootFromRequest.ProductionYear;
             boot.CreatedAt = bootFromRequest.CreatedAt;
             boot.IsAvailable = bootFromRequest.IsAvailable;
-            boot.BootId = bootFromRequest.BootId;
+            boot.Id = bootFromRequest.BootId;
 
             _bootRepo.Update(boot);
             _bootRepo.SaveChanges();

@@ -5,7 +5,7 @@ namespace BootRent.DAL.Data.Models
     public class Boot
     {
 
-        public Guid BootId { get; set; }
+        public Guid Id { get; set; }
 
         [Required(ErrorMessage = "BootName is required.")]
         public string BootName { get; set; } = string.Empty;

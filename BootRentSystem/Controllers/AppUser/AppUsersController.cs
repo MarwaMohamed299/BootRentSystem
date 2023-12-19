@@ -114,7 +114,7 @@ namespace BootRentSystem.Controllers.AppUsers
 
 
             var secretKey = _configuration.GetValue<string>("SecretKey");
-            var secretKeyInBytes = Encoding.ASCII.GetBytes(secretKey);
+            var secretKeyInBytes = Encoding.ASCII.GetBytes(secretKey!);
             var key = new SymmetricSecurityKey(secretKeyInBytes);
             var generatingToken = new SigningCredentials(key, SecurityAlgorithms.HmacSha256Signature);
             var userClaims = await _userManager.GetClaimsAsync(appUser);
@@ -290,7 +290,7 @@ namespace BootRentSystem.Controllers.AppUsers
                 {
                     return new UserManagerResponse
                     {
-                        Message = "Passwored Dosen't Match Confirmation!!!",
+                        Message = "Password Does not Match Confirmation!!!",
                         IsSuccess = false,
                     };
                 }

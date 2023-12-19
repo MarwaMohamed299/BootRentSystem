@@ -4,6 +4,7 @@ using BootRent.DAL.Data.Context.Rent;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BootRent.DAL.Migrations.Rent
 {
     [DbContext(typeof(RentContext))]
-    partial class RentContextModelSnapshot : ModelSnapshot
+    [Migration("20231219213421_Seeding3")]
+    partial class Seeding3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

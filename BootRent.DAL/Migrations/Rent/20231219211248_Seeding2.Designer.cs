@@ -4,6 +4,7 @@ using BootRent.DAL.Data.Context.Rent;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BootRent.DAL.Migrations.Rent
 {
     [DbContext(typeof(RentContext))]
-    partial class RentContextModelSnapshot : ModelSnapshot
+    [Migration("20231219211248_Seeding2")]
+    partial class Seeding2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -52,7 +55,7 @@ namespace BootRent.DAL.Migrations.Rent
                     b.HasData(
                         new
                         {
-                            Id = new Guid("8ca42489-2d55-4e18-980c-9d20e2cf6dc5"),
+                            Id = new Guid("19350dbc-3b7d-4279-81d5-d0de467d793f"),
                             BootName = "BootName1",
                             CreatedAt = new DateTime(2015, 12, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsAvailable = true,
@@ -61,7 +64,7 @@ namespace BootRent.DAL.Migrations.Rent
                         },
                         new
                         {
-                            Id = new Guid("81f28fe4-4b11-4425-af9b-41812f92398d"),
+                            Id = new Guid("a4727a9f-5218-45f6-ac11-3652862807e4"),
                             BootName = "BootName2",
                             CreatedAt = new DateTime(2018, 12, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsAvailable = true,
@@ -70,7 +73,7 @@ namespace BootRent.DAL.Migrations.Rent
                         },
                         new
                         {
-                            Id = new Guid("549b92b0-0be0-4d70-ab28-3eeb92cba05e"),
+                            Id = new Guid("69a32e79-2dd8-4ffd-af6a-4aa870e7f62d"),
                             BootName = "BootName1",
                             CreatedAt = new DateTime(2022, 12, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsAvailable = true,
@@ -82,7 +85,6 @@ namespace BootRent.DAL.Migrations.Rent
             modelBuilder.Entity("BootRent.DAL.Data.Models.Package", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Description")
@@ -96,48 +98,38 @@ namespace BootRent.DAL.Migrations.Rent
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<Guid>("ReservationId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("ReservationId")
-                        .IsUnique();
 
                     b.ToTable("Packages");
 
                     b.HasData(
                         new
                         {
-                            Id = new Guid("3e3a53f4-02ef-4d97-822a-886ee8f8abf4"),
+                            Id = new Guid("02ca7042-6dbd-46f8-ba44-3ec67876b056"),
                             Description = "Celebrate your birthday with style",
                             PackageName = "Birthday",
-                            Price = 800.00m,
-                            ReservationId = new Guid("00000000-0000-0000-0000-000000000000")
+                            Price = 800.00m
                         },
                         new
                         {
-                            Id = new Guid("572c67d2-e7cf-465e-ad96-c5e63cddc6ac"),
+                            Id = new Guid("26f3bcb3-7d33-4027-a13d-669063071b34"),
                             Description = "Celebrate your birthday with style",
                             PackageName = "Birthday Package",
-                            Price = 800.00m,
-                            ReservationId = new Guid("00000000-0000-0000-0000-000000000000")
+                            Price = 800.00m
                         },
                         new
                         {
-                            Id = new Guid("304becc9-220e-4e30-b0fb-a02d77ace21a"),
+                            Id = new Guid("d709e572-be55-41fb-927f-9d962b6dd93a"),
                             Description = "Perfect for hosting events and parties",
                             PackageName = "Party Package",
-                            Price = 1000.00m,
-                            ReservationId = new Guid("00000000-0000-0000-0000-000000000000")
+                            Price = 1000.00m
                         },
                         new
                         {
-                            Id = new Guid("3192fb4f-d0aa-4335-bc81-22f1131af0da"),
+                            Id = new Guid("ca14a971-3c20-4020-9e0a-aa3cbd131b2f"),
                             Description = "Perfect for weddings events and parties",
                             PackageName = "Wedding Package",
-                            Price = 1500.00m,
-                            ReservationId = new Guid("00000000-0000-0000-0000-000000000000")
+                            Price = 1500.00m
                         });
                 });
 
@@ -156,9 +148,6 @@ namespace BootRent.DAL.Migrations.Rent
                     b.Property<DateTime>("CheckOutDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("PackageId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("Id");
 
                     b.HasIndex("BootId");
@@ -168,27 +157,24 @@ namespace BootRent.DAL.Migrations.Rent
                     b.HasData(
                         new
                         {
-                            Id = new Guid("663a064c-e2dc-45f3-a86e-7ceea14c6bb1"),
-                            BootId = new Guid("8ca42489-2d55-4e18-980c-9d20e2cf6dc5"),
-                            CheckInDate = new DateTime(2023, 12, 20, 0, 34, 21, 395, DateTimeKind.Local).AddTicks(2073),
-                            CheckOutDate = new DateTime(2024, 1, 4, 0, 34, 21, 395, DateTimeKind.Local).AddTicks(2084),
-                            PackageId = new Guid("572c67d2-e7cf-465e-ad96-c5e63cddc6ac")
+                            Id = new Guid("3c7198a7-dbad-4b85-b631-34fda816fd56"),
+                            BootId = new Guid("19350dbc-3b7d-4279-81d5-d0de467d793f"),
+                            CheckInDate = new DateTime(2023, 12, 20, 0, 12, 48, 323, DateTimeKind.Local).AddTicks(1353),
+                            CheckOutDate = new DateTime(2024, 1, 4, 0, 12, 48, 323, DateTimeKind.Local).AddTicks(1366)
                         },
                         new
                         {
-                            Id = new Guid("1d104082-d1bc-4c38-8152-e98baaebdcd4"),
-                            BootId = new Guid("81f28fe4-4b11-4425-af9b-41812f92398d"),
-                            CheckInDate = new DateTime(2023, 12, 20, 0, 34, 21, 395, DateTimeKind.Local).AddTicks(2093),
-                            CheckOutDate = new DateTime(2023, 12, 30, 0, 34, 21, 395, DateTimeKind.Local).AddTicks(2094),
-                            PackageId = new Guid("304becc9-220e-4e30-b0fb-a02d77ace21a")
+                            Id = new Guid("9b2775a8-1598-4696-adbe-025c6077acdf"),
+                            BootId = new Guid("a4727a9f-5218-45f6-ac11-3652862807e4"),
+                            CheckInDate = new DateTime(2023, 12, 20, 0, 12, 48, 323, DateTimeKind.Local).AddTicks(1380),
+                            CheckOutDate = new DateTime(2023, 12, 30, 0, 12, 48, 323, DateTimeKind.Local).AddTicks(1381)
                         },
                         new
                         {
-                            Id = new Guid("f907b552-0bbf-4f8a-9d7b-dd6756d53e99"),
-                            BootId = new Guid("549b92b0-0be0-4d70-ab28-3eeb92cba05e"),
-                            CheckInDate = new DateTime(2023, 12, 20, 0, 34, 21, 395, DateTimeKind.Local).AddTicks(2097),
-                            CheckOutDate = new DateTime(2024, 1, 9, 0, 34, 21, 395, DateTimeKind.Local).AddTicks(2098),
-                            PackageId = new Guid("3e3a53f4-02ef-4d97-822a-886ee8f8abf4")
+                            Id = new Guid("0519e3ac-4f8f-4d5d-91ad-6df05b296759"),
+                            BootId = new Guid("69a32e79-2dd8-4ffd-af6a-4aa870e7f62d"),
+                            CheckInDate = new DateTime(2023, 12, 20, 0, 12, 48, 323, DateTimeKind.Local).AddTicks(1384),
+                            CheckOutDate = new DateTime(2024, 1, 9, 0, 12, 48, 323, DateTimeKind.Local).AddTicks(1385)
                         });
                 });
 
@@ -196,7 +182,7 @@ namespace BootRent.DAL.Migrations.Rent
                 {
                     b.HasOne("BootRent.DAL.Data.Models.Reservation", "Reservation")
                         .WithOne("Package")
-                        .HasForeignKey("BootRent.DAL.Data.Models.Package", "ReservationId")
+                        .HasForeignKey("BootRent.DAL.Data.Models.Package", "Id")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 

@@ -26,14 +26,14 @@ namespace BootRent.BL.Managers.Reservations
                 CheckInDate = reservationFromRequest.CheckInDate,
                CheckOutDate = reservationFromRequest.CheckOutDate,
                BootId = reservationFromRequest.BootId,
-               ReservationId=reservationFromRequest.ReservationId
+               Id=reservationFromRequest.ReservationId
 
                
 
             };
             _reservationRepo.Add(reservation);
             _reservationRepo.SaveChanges();
-            return reservation.ReservationId;
+            return reservation.Id;
 
         }
 
@@ -58,12 +58,10 @@ namespace BootRent.BL.Managers.Reservations
                 CheckInDate = R.CheckInDate,
                 CheckOutDate = R.CheckOutDate,
                 BootId =  R.BootId,
-                ReservationId=R.ReservationId
-
+                ReservationId=R.Id
 
             });
         }
-      
 
         public ReservationReadDto? GetReservationById(Guid id)            //GetById
         {
@@ -76,7 +74,7 @@ namespace BootRent.BL.Managers.Reservations
             {
                 CheckInDate = reservationFromDb.CheckInDate,
                 CheckOutDate=reservationFromDb.CheckOutDate,
-                ReservationId=reservationFromDb.ReservationId,
+                ReservationId=reservationFromDb.Id,
             };
         }
 
@@ -89,11 +87,11 @@ namespace BootRent.BL.Managers.Reservations
             }
             reservation.CheckInDate = reservationFromRequest.CheckInDate;
             reservation.CheckOutDate = reservationFromRequest.CheckOutDate;
-            reservation.ReservationId = reservation.BootId;
+            reservation.Id = reservation.BootId;
           
             _reservationRepo.Update(reservation);
             _reservationRepo.SaveChanges();
-            return true;
+            return  true;
         }
     }
 }
